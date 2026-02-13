@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Fira+Code:wght@400;500;600&family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  --terminal-green: #0f0;
+  --terminal-dark-green: #0a0;
+  --terminal-bg: #0a0a0a;
+  --terminal-border: #1a1a1a;
+  --accent-pink: #e91e63;
+  --accent-pink-light: #f48fb1;
+  --card-bg: #1a1a1a;
+  --card-bg-light: #2a2a2a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--terminal-bg);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Terminal Styles */
+.terminal-font {
+  font-family: 'VT323', 'Fira Code', monospace;
+}
+
+.terminal-text {
+  color: var(--terminal-green);
+  text-shadow: 0 0 5px var(--terminal-green), 0 0 10px var(--terminal-green);
+}
+
+.terminal-text-dim {
+  color: var(--terminal-dark-green);
+  text-shadow: 0 0 3px var(--terminal-dark-green);
+}
+
+.terminal-glow {
+  text-shadow: 0 0 5px var(--terminal-green), 0 0 10px var(--terminal-green), 0 0 15px var(--terminal-green);
+}
+
+.terminal-container {
+  background: linear-gradient(180deg, #0d0d0d 0%, #050505 100%);
+  border: 2px solid #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.1),
+    inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
+/* CRT Screen Effect */
+.crt-effect {
+  position: relative;
+}
+
+.crt-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+.crt-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Scanline animation */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 255, 0, 0.1);
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s infinite;
+}
+
+/* Progress bar glow */
+.progress-bar-glow {
+  box-shadow: 0 0 10px var(--terminal-green), 0 0 20px var(--terminal-green);
+}
+
+/* Button styles */
+.terminal-button {
+  font-family: 'VT323', monospace;
+  background: var(--terminal-green);
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.terminal-button:hover {
+  box-shadow: 0 0 20px var(--terminal-green), 0 0 40px var(--terminal-green);
+  transform: scale(1.05);
+}
+
+.terminal-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Input styles */
+.terminal-input {
+  font-family: 'VT323', monospace;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--terminal-green);
+  color: var(--terminal-green);
+  font-size: 1.5rem;
+  padding: 8px 0;
+  outline: none;
+  width: 100%;
+  text-shadow: 0 0 5px var(--terminal-green);
+}
+
+.terminal-input::placeholder {
+  color: rgba(0, 255, 0, 0.3);
+}
+
+.terminal-input:focus {
+  border-bottom-color: var(--terminal-green);
+  box-shadow: 0 2px 10px var(--terminal-green);
+}
+
+/* Heart decorations */
+.heart-decoration {
+  color: #c41e3a;
+  text-shadow: 0 0 10px #c41e3a;
+  opacity: 0.6;
+}
+
+/* Card styles */
+.birthday-card {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+}
+
+.memory-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.memory-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(233, 30, 99, 0.2);
+}
+
+.accent-gradient {
+  background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-pink-light) 100%);
+}
+
+.gift-button {
+  background: linear-gradient(135deg, var(--accent-pink) 0%, #c2185b 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gift-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+}
+
+/* Glitch effect for ACCESS GRANTED */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch-effect {
+  animation: glitch 0.3s infinite;
+}
+
+/* Terminal destruction animation */
+@keyframes terminalDestroy {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: blur(0);
+  }
+  50% {
+    transform: scale(1.1) rotate(2deg);
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+  100% {
+    transform: scale(0) rotate(10deg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+.terminal-destroy {
+  animation: terminalDestroy 1s ease-in-out forwards;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Quote styling */
+.quote-card {
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-bg-light) 100%);
+  border-left: 4px solid var(--accent-pink);
+}
+
+/* Infinity symbol */
+.infinity-icon {
+  font-size: 2rem;
+  color: var(--accent-pink);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .terminal-input {
+    font-size: 1.2rem;
+  }
+  
+  .terminal-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
