@@ -2,6 +2,10 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { animate } from 'animejs';
 import Typed from 'typed.js';
 import { Howl } from 'howler';
+import deniedSoundSrc from '../assets/sounds/denied.mp3';
+import grantedSoundSrc from '../assets/sounds/granted.mp3';
+import keySoundSrc from '../assets/sounds/key.mp3';
+import successSoundSrc from '../assets/sounds/success.mp3';
 
 interface TriviaProps {
   onComplete: () => void;
@@ -63,7 +67,7 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
   useEffect(() => {
     // Initialize sounds with fallback (using Web Audio API beeps if files don't exist)
     keySound.current = new Howl({
-      src: ['/src/assets/sounds/key.mp3', '/src/assets/sounds/key.wav'],
+      src: [ keySoundSrc ],
       volume: 0.3,
       onloaderror: () => {
         // Fallback: create a simple beep
@@ -72,7 +76,7 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
     });
 
     accessDeniedSound.current = new Howl({
-      src: ['/src/assets/sounds/denied.mp3', '/src/assets/sounds/denied.wav'],
+      src: [deniedSoundSrc],
       volume: 0.5,
       onloaderror: () => {
         accessDeniedSound.current = null;
@@ -80,7 +84,7 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
     });
 
     accessGrantedSound.current = new Howl({
-      src: ['/src/assets/sounds/granted.mp3', '/src/assets/sounds/granted.wav'],
+      src: [grantedSoundSrc],
       volume: 0.5,
       onloaderror: () => {
         accessGrantedSound.current = null;
@@ -88,7 +92,7 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
     });
 
     correctAnswerSound.current = new Howl({
-      src: ['/src/assets/sounds/success.mp3', '/src/assets/sounds/success.wav'],
+      src: [successSoundSrc],
       volume: 0.5,
       onloaderror: () => {
         correctAnswerSound.current = null;

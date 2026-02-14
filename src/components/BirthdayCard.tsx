@@ -4,6 +4,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { getDayDifference } from "../utils";
 import { Howl } from "howler";
+import firstDate from "../assets/first-date.jpg";
+import tour from "../assets/tour.jpg";
+import smile from "../assets/smile.jpg";
+import letterMusic from "../assets/sounds/letter_music.mp3";
 
 interface BirthdayCardProps {
   isMuted: boolean;
@@ -28,7 +32,7 @@ const memories: Memory[] = [
     title: "Nuestra Primera Cita (esta es la foto nuestra más antigua que tengo)",
     description:
       "La otra vez me preguntaste cómo me sentía ese día, y aunque no recuerde con claridad, reconozco que estaba muy nervioso al igual que emocionado, lo cual normalmente lleva a que me den muchas ganas de ir al baño 😍​",
-    image: "/src/assets/first-date.jpg",
+    image: firstDate.src,
   },
   {
     id: 2,
@@ -45,14 +49,14 @@ const memories: Memory[] = [
     title: "Tour De Iglesias 2024 (hay que repetirlo!)",
     description:
       "Me estaba acordando de esto, y DIOS, realmente me acuerdo como deseaba que esa tarde no terminase jamás ⛪​",
-    image: "/src/assets/tour.jpg",
+    image: tour.src,
   },
   {
     id: 4,
     type: "image",
     title: "Esa Sonrisa",
     description: "Sigue siendo top 1 vistas del mundo :3",
-    image: "/src/assets/smile.jpg",
+    image: smile.src,
   },
   {
     id: 5,
@@ -70,7 +74,7 @@ export default function BirthdayCard({ isMuted }: BirthdayCardProps) {
   // Background music effect
   useEffect(() => {
     musicRef.current = new Howl({
-      src: ['/sounds/letter_music.mp3'],
+      src: letterMusic,
       volume: 0.05,
       loop: true,
       onload: () => {

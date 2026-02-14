@@ -115,14 +115,6 @@ export default function BootSequence({ onComplete, isMuted }: BootSequenceProps)
   return (
     <div className="min-h-dvh bg-[#0a0a0a] flex flex-col items-center justify-center px-4 py-8 sm:p-6 crt-effect">
       <div className="scanline"></div>
-      
-      {/* Mute button */}
-      <button 
-        className="absolute top-3 right-3 sm:top-4 sm:right-4 terminal-font terminal-text text-xs sm:text-sm border border-[#0f0] px-2 py-1 sm:px-3 hover:bg-[#0f0] hover:text-black transition-colors z-20"
-        onClick={() => {}}
-      >
-        [ {isMuted ? 'UNMUTE' : 'MUTE'} ]
-      </button>
 
       {/* Main title */}
       <div className="text-center mb-6 sm:mb-10 md:mb-12 px-2">
