@@ -236,7 +236,7 @@ export default function BirthdayCard({ isMuted }: BirthdayCardProps) {
               >
                 Una cartita para vos
               </h2>
-              <div className="w-16 sm:w-24 h-0.5 bg-gradient-to-r from-transparent via-[#e91e63] to-transparent mx-auto mt-3 sm:mt-4"></div>
+              <div className="w-16 sm:w-24 h-0.5 bg-linear-to-r from-transparent via-[#e91e63] to-transparent mx-auto mt-3 sm:mt-4"></div>
             </div>
 
             {/* Letter Content */}
@@ -457,7 +457,7 @@ export default function BirthdayCard({ isMuted }: BirthdayCardProps) {
 
       {/* Footer */}
       <footer className="mx-auto py-6 sm:py-8 text-center px-4">
-        <p className="text-gray-500 text-xs sm:text-sm">Hecho with love by Fran ❤️ para ti</p>
+        <p className="text-gray-500 text-xs sm:text-sm">Hecho with love by Fran ❤️ para Mar</p>
         <p className="text-gray-600 text-[10px] sm:text-xs mt-1.5 sm:mt-2">
           {new Date().getFullYear()} — Nuestro viaje continúa...
         </p>
