@@ -12,12 +12,6 @@
   --card-bg-light: #2a2a2a;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -138,19 +132,7 @@ body {
   box-shadow: 0 0 10px var(--terminal-green), 0 0 20px var(--terminal-green);
 }
 
-/* Button styles */
-.terminal-button {
-  font-family: 'VT323', monospace;
-  background: var(--terminal-green);
-  color: #000;
-  border: none;
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
+/* Button styles - see mobile-first section at bottom */
 
 .terminal-button:hover {
   box-shadow: 0 0 20px var(--terminal-green), 0 0 40px var(--terminal-green);
@@ -162,27 +144,10 @@ body {
   cursor: not-allowed;
 }
 
-/* Input styles */
-.terminal-input {
-  font-family: 'VT323', monospace;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid var(--terminal-green);
-  color: var(--terminal-green);
-  font-size: 1.5rem;
-  padding: 8px 0;
-  outline: none;
-  width: 100%;
-  text-shadow: 0 0 5px var(--terminal-green);
-}
+/* Input styles - see mobile-first section at bottom */
 
 .terminal-input::placeholder {
   color: rgba(0, 255, 0, 0.3);
-}
-
-.terminal-input:focus {
-  border-bottom-color: var(--terminal-green);
-  box-shadow: 0 2px 10px var(--terminal-green);
 }
 
 /* Heart decorations */
@@ -213,20 +178,7 @@ body {
   background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-pink-light) 100%);
 }
 
-.gift-button {
-  background: linear-gradient(135deg, var(--accent-pink) 0%, #c2185b 100%);
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+/* .gift-button - see mobile-first section at bottom */
 
 .gift-button:hover {
   transform: scale(1.05);
@@ -310,14 +262,76 @@ body {
   color: var(--accent-pink);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Mobile-first base styles */
+.terminal-input {
+  font-family: 'VT323', monospace;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--terminal-green);
+  color: var(--terminal-green);
+  font-size: 1rem;
+  padding: 8px 0;
+  outline: none;
+  width: 100%;
+  text-shadow: 0 0 5px var(--terminal-green);
+}
+
+.terminal-button {
+  font-family: 'VT323', monospace;
+  background: var(--terminal-green);
+  color: #000;
+  border: none;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.gift-button {
+  background: linear-gradient(135deg, var(--accent-pink) 0%, #c2185b 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Tablet and up */
+@media (min-width: 640px) {
   .terminal-input {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
   
   .terminal-button {
     font-size: 1rem;
-    padding: 10px 20px;
+    padding: 12px 20px;
+    letter-spacing: 2px;
+  }
+  
+  .gift-button {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+  .terminal-input {
+    font-size: 1.5rem;
+  }
+  
+  .terminal-button {
+    font-size: 1.2rem;
+    padding: 12px 24px;
   }
 }
