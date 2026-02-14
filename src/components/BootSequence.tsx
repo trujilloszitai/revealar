@@ -113,23 +113,23 @@ export default function BootSequence({ onComplete, isMuted }: BootSequenceProps)
   }).replace(/\//g, '-');
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center p-4 crt-effect">
+    <div className="min-h-dvh bg-[#0a0a0a] flex flex-col items-center justify-center px-4 py-8 sm:p-6 crt-effect">
       <div className="scanline"></div>
       
       {/* Mute button */}
       <button 
-        className="absolute top-4 right-4 terminal-font terminal-text text-sm border border-[#0f0] px-3 py-1 hover:bg-[#0f0] hover:text-black transition-colors z-20"
+        className="absolute top-3 right-3 sm:top-4 sm:right-4 terminal-font terminal-text text-xs sm:text-sm border border-[#0f0] px-2 py-1 sm:px-3 hover:bg-[#0f0] hover:text-black transition-colors z-20"
         onClick={() => {}}
       >
         [ {isMuted ? 'UNMUTE' : 'MUTE'} ]
       </button>
 
       {/* Main title */}
-      <div className="text-center mb-12">
-        <h1 className="terminal-font terminal-text text-4xl md:text-6xl mb-2 terminal-glow">
+      <div className="text-center mb-6 sm:mb-10 md:mb-12 px-2">
+        <h1 className="terminal-font terminal-text text-2xl sm:text-4xl md:text-5xl lg:text-6xl mb-2 terminal-glow leading-tight">
           *** RETRO-OS V1.02 ***
         </h1>
-        <p className="terminal-font terminal-text-dim text-lg tracking-[0.3em]">
+        <p className="terminal-font terminal-text-dim text-sm sm:text-base md:text-lg tracking-[0.15em] sm:tracking-[0.3em]">
           SECUENCIA DE ARRANQUE INICIADA
         </p>
       </div>
@@ -137,12 +137,12 @@ export default function BootSequence({ onComplete, isMuted }: BootSequenceProps)
       {/* Terminal window */}
       <div 
         ref={containerRef}
-        className="terminal-container w-full max-w-2xl p-6 mb-8"
+        className="terminal-container w-full max-w-2xl p-4 sm:p-6 mb-6 sm:mb-8 mx-auto"
       >
-        <div className="space-y-2">
+        <div className="space-y-1.5 sm:space-y-2">
           {displayedMessages.map((msg, index) => (
-            <div key={index} className="flex items-center gap-2 terminal-font text-lg md:text-xl">
-              <span className="terminal-text">{msg.text}</span>
+            <div key={index} className="flex flex-wrap items-center gap-1 sm:gap-2 terminal-font text-sm sm:text-lg md:text-xl">
+              <span className="terminal-text break-all sm:break-normal">{msg.text}</span>
               {msg.status && (
                 <span className={`${msg.status === 'PROCESANDO' ? 'text-yellow-400' : 'terminal-text'}`}>
                   {msg.status}
@@ -155,14 +155,14 @@ export default function BootSequence({ onComplete, isMuted }: BootSequenceProps)
 
       {/* Progress bar section */}
       {currentMessageIndex >= bootMessages.length && (
-        <div className="w-full max-w-2xl mb-8">
-          <div className="flex justify-between terminal-font terminal-text text-sm mb-2">
+        <div className="w-full max-w-2xl mb-6 sm:mb-8 px-1">
+          <div className="flex justify-between terminal-font terminal-text text-xs sm:text-sm mb-2">
             <span>CARGANDO ASSETS</span>
             <span>{progress}%</span>
           </div>
           
-          <div className="border-2 border-[#0f0] p-1 bg-black">
-            <div className="flex gap-1 h-8">
+          <div className="border-2 border-[#0f0] p-0.5 sm:p-1 bg-black">
+            <div className="flex gap-0.5 sm:gap-1 h-6 sm:h-8">
               {Array.from({ length: 20 }).map((_, i) => (
                 <div
                   key={i}
@@ -175,7 +175,7 @@ export default function BootSequence({ onComplete, isMuted }: BootSequenceProps)
             </div>
           </div>
           
-          <div className="flex justify-between terminal-font terminal-text-dim text-xs mt-2">
+          <div className="flex justify-between terminal-font terminal-text-dim text-[10px] sm:text-xs mt-1.5 sm:mt-2">
             <span>BLOQUE: {Math.floor(progress * 10.24)}KB</span>
             <span>EST: {Math.max(0, Math.ceil((100 - progress) / 25))}s</span>
           </div>
@@ -184,18 +184,18 @@ export default function BootSequence({ onComplete, isMuted }: BootSequenceProps)
 
       {/* Awaiting input */}
       {showAwaitingInput && (
-        <div className="terminal-font terminal-text text-2xl md:text-3xl terminal-glow">
+        <div className="terminal-font terminal-text text-lg sm:text-2xl md:text-3xl terminal-glow text-center px-4">
           <span ref={typedRef}></span>
         </div>
       )}
 
       {/* Footer info */}
-      <div className="absolute bottom-4 left-4 terminal-font terminal-text-dim text-xs">
+      <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 terminal-font terminal-text-dim text-[10px] sm:text-xs">
         <div>MEM: 640K OK</div>
         <div>FECHA: {currentDate}</div>
       </div>
 
-      <div className="absolute bottom-4 right-4 terminal-font terminal-text-dim text-xs text-right">
+      <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 terminal-font terminal-text-dim text-[10px] sm:text-xs text-right">
         <div>CONEXIÓN SEGURA</div>
         <div>🔒 ENCRIPTADO</div>
       </div>
