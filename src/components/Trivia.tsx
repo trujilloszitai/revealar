@@ -58,6 +58,7 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
   const keySound = useRef<Howl | null>(null);
   const accessDeniedSound = useRef<Howl | null>(null);
   const accessGrantedSound = useRef<Howl | null>(null);
+  const correctAnswerSound = useRef<Howl | null>(null);
 
   useEffect(() => {
     // Initialize sounds with fallback (using Web Audio API beeps if files don't exist)
@@ -86,9 +87,18 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
       }
     });
 
+    correctAnswerSound.current = new Howl({
+      src: ['/src/assets/sounds/success.mp3', '/src/assets/sounds/success.wav'],
+      volume: 0.5,
+      onloaderror: () => {
+        correctAnswerSound.current = null;
+      }
+    });
+
     return () => {
       keySound.current?.unload();
       accessDeniedSound.current?.unload();
+      correctAnswerSound.current?.unload();
       accessGrantedSound.current?.unload();
     };
   }, []);
@@ -148,6 +158,12 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
     }
   }, [isMuted]);
 
+  const playCorrectAnswerSound = useCallback(() => {
+    if (!isMuted && correctAnswerSound.current) {
+      correctAnswerSound.current.play();
+    }
+  }, [isMuted]);
+
   const playGrantedSound = useCallback(() => {
     if (!isMuted && accessGrantedSound.current) {
       accessGrantedSound.current.play();
@@ -169,7 +185,7 @@ export default function Trivia({ onComplete, isMuted }: TriviaProps) {
 
     if (userAnswer.includes(correctAnswer)) {
       setStatus('correct');
-      
+      playCorrectAnswerSound();
       // Shake animation for correct
       if (containerRef.current) {
         animate(containerRef.current, {

@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import confetti from "canvas-confetti";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Image } from "astro:assets";
-import firstDate from "../assets/first-date.jpg";
 import { getDayDifference } from "../utils";
+import { Howl } from "howler";
 
 interface BirthdayCardProps {
   isMuted: boolean;
@@ -66,6 +65,35 @@ const memories: Memory[] = [
 
 export default function BirthdayCard({ isMuted }: BirthdayCardProps) {
   const [showGift, setShowGift] = useState(false);
+  const musicRef = useRef<Howl | null>(null);
+
+  // Background music effect
+  useEffect(() => {
+    musicRef.current = new Howl({
+      src: ['/sounds/letter_music.mp3'],
+      volume: 0.05,
+      loop: true,
+      onload: () => {
+        musicRef.current?.seek(5);
+      }
+    });
+
+    return () => {
+      musicRef.current?.stop();
+      musicRef.current?.unload();
+    };
+  }, []);
+
+  // Mute/unmute effect
+  useEffect(() => {
+    if (musicRef.current) {
+      if (isMuted) {
+        musicRef.current.pause();
+      } else if (!musicRef.current.playing()) {
+        musicRef.current.play();
+      }
+    }
+  }, [isMuted]);
 
   useEffect(() => {
     // Initialize AOS
@@ -429,7 +457,7 @@ export default function BirthdayCard({ isMuted }: BirthdayCardProps) {
 
       {/* Footer */}
       <footer className="mx-auto py-6 sm:py-8 text-center px-4">
-        <p className="text-gray-500 text-xs sm:text-sm">Hecho con ❤️ para ti</p>
+        <p className="text-gray-500 text-xs sm:text-sm">Hecho with love by Fran ❤️ para ti</p>
         <p className="text-gray-600 text-[10px] sm:text-xs mt-1.5 sm:mt-2">
           {new Date().getFullYear()} — Nuestro viaje continúa...
         </p>
